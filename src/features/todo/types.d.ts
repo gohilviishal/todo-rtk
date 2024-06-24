@@ -3,4 +3,7 @@ interface Todo {
   text: string;
 }
 
-export { Todo };
+interface TodoState {
+  todos: Todo[];
+}
+export { Todo, TodoState };

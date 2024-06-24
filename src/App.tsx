@@ -1,12 +1,22 @@
-import './App.css'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Todos from "./components/Todos";
+import { ChakraProvider } from "@chakra-ui/react";
+import { Provider } from "react-redux";
+import store from "./app/store";
 
 function App() {
-
   return (
-    <h1>
-      Learn abour redux toolkit
-    </h1>
-  )
+    <Provider store={store}> 
+    <ChakraProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" Component={Todos} />
+        </Routes>
+      </BrowserRouter>
+    </ChakraProvider>
+    </Provider>
+  );
 }
 
-export default App
+export default App;
