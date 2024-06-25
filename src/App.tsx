@@ -7,14 +7,14 @@ import Todos from "./pages/Todos";
 
 function App() {
   return (
-    <Provider store={store}> 
-    <ChakraProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" Component={Todos} />
-        </Routes>
-      </BrowserRouter>
-    </ChakraProvider>
+    <Provider store={store}>
+      <ChakraProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" Component={Todos} />
+          </Routes>
+        </BrowserRouter>
+      </ChakraProvider>
     </Provider>
   );
 }
