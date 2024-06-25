@@ -1,5 +1,16 @@
 # Todo App with React, Redux, and Chakra UI
 
+## Screenshots
+
+![Todo List](public/screenshots/Screenshot1.png)
+*Screenshot of the Todo List view.*
+
+![Add Todo](public/screenshots/Screenshot2.png)
+*Screenshot of adding a new Todo.*
+
+![Update Todo](public/screenshots/Screenshot3.png)
+*Screenshot of updating a Todo.*
+
 ## Table of Contents
 
 - [Introduction](#introduction)
