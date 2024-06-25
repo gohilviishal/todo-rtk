@@ -19,7 +19,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { addTodo } from "../features/todo/todoSlice";
+import { addTodo } from "../../features/todo/todoSlice";
 
 interface AddTodoProps {
   isOpen: boolean;
@@ -31,7 +31,7 @@ const schema = yup.object().shape({
 });
 
 type FormData = yup.InferType<typeof schema>;
-const AddTodo: React.FC<AddTodoProps> = ({ isOpen, onClose }) => {
+export const AddTodo: React.FC<AddTodoProps> = ({ isOpen, onClose }) => {
   const toast = useToast();
   const {
     register,
@@ -87,5 +87,3 @@ const AddTodo: React.FC<AddTodoProps> = ({ isOpen, onClose }) => {
     </Modal>
   );
 };
-
-export default AddTodo;

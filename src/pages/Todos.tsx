@@ -11,15 +11,21 @@ import {
   IconButton,
   useToast,
 } from "@chakra-ui/react";
-import React from "react";
-import AddTodo from "./AddTodo";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Todo } from "../features/todo/types";
 import { RootState } from "../app/store";
-import { CheckCircleIcon, CloseIcon } from "@chakra-ui/icons";
+import { CheckCircleIcon, CloseIcon, EditIcon } from "@chakra-ui/icons";
 import { removeTodo } from "../features/todo/todoSlice";
+import { AddTodo, UpdateTodo } from "../components/Todos";
 
 const Todos: React.FC = () => {
+  const [todo, setTodo] = useState<Todo | null>(null);
+  const {
+    isOpen: isAddOpen,
+    onOpen: onAddOpen,
+    onClose: onAddClose,
+  } = useDisclosure();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const todos = useSelector((state: RootState) => state.todo.todos);
   const dispatch = useDispatch();
@@ -35,18 +41,23 @@ const Todos: React.FC = () => {
       isClosable: true,
     });
   };
+
+  const handleUpdate = (updateTodo:Todo) => {
+    setTodo(updateTodo);
+    onOpen();
+  };
   return (
     <Box bg="gray.100" minH="100vh" py={10}>
       <Container display="flex" justifyContent="center" mb={6}>
-        <Button onClick={onOpen} colorScheme="teal">
+        <Button onClick={onAddOpen} colorScheme="teal">
           Add Todo
         </Button>
       </Container>
       <Container display="flex" justifyContent="center">
         <List spacing={4} width="100%">
-          {todos.map((todo: Todo) => (
+          {todos.map((row: Todo) => (
             <ListItem
-              key={todo.id}
+              key={row.id}
               display="flex"
               alignItems="center"
               bg="white"
@@ -62,7 +73,7 @@ const Todos: React.FC = () => {
             >
               <ListIcon as={CheckCircleIcon} color="teal.500" />
               <Text fontSize="lg" color="gray.800" flex="1">
-                {todo.text}
+                {row.text}
               </Text>
               <Spacer />
               <IconButton
@@ -71,13 +82,24 @@ const Todos: React.FC = () => {
                 color="black.600"
                 cursor="pointer"
                 mx={2}
-                onClick={()=>handleDelete(todo.id)}
+                onClick={() => handleDelete(row.id)}
+              />
+              <IconButton
+                icon={<EditIcon />}
+                aria-label="remove todo"
+                color="black.600"
+                cursor="pointer"
+                mx={2}
+                onClick={() => handleUpdate(row)}
               />
             </ListItem>
           ))}
         </List>
       </Container>
-      {isOpen && <AddTodo isOpen={isOpen} onClose={onClose} />}
+      {isAddOpen && <AddTodo isOpen={isAddOpen} onClose={onAddClose} />}
+      {isOpen && (
+        <UpdateTodo isOpen={isOpen} onClose={onClose} todo={todo} />
+      )}
     </Box>
   );
 };
