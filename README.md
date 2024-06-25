@@ -55,8 +55,8 @@ Make sure you have the following installed on your machine:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/todo-app.git
-   cd todo-app
+   https://github.com/gohilviishal/todo-rtk
+   cd todo-rtk
    ```
 
 2. Install the dependencies:
